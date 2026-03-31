@@ -1,195 +1,532 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AICode Nav - AI编程工具导航与测评</title>
-    <meta name="description" content="专注AI编程工具的测评、对比与推荐。Cursor、Trae、GitHub Copilot等主流AI编程助手深度评测，帮助开发者选择最适合的AI编程工具。">
-    <meta name="keywords" content="AI编程工具,AI代码助手,Cursor,Trae,GitHub Copilot,代码补全,AI编程导航">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>AI 编程工具导航 - 用 AI 加速你的编程学习之旅</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        /* Content Sections */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Tool Cards Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e8eaff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .tool-name {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .tool-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .tool-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        .tag.free {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .tag.paid {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .tool-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tool-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .stats {
+                gap: 15px;
+            }
+
+            .stat-item {
+                padding: 10px 20px;
+            }
+
+            .section {
+                padding: 25px 20px;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <a href="/" class="logo">
-                    <span class="logo-icon">&lt;/&gt;</span>
-                    <span class="logo-text">AICode Nav</span>
-                </a>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🚀 AI 编程工具导航</h1>
+            <p>用 AI 加速你的编程学习之旅</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">精选工具</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">分类覆盖</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">实测推荐</span>
+                </div>
             </div>
-            <div class="nav-links">
-                <a href="#tools" class="nav-link">工具导航</a>
-                <a href="#reviews" class="nav-link">深度测评</a>
-                <a href="#compare" class="nav-link">对比评测</a>
-                <a href="#tutorials" class="nav-link">使用教程</a>
-            </div>
-            <div class="nav-search">
-                <input type="text" placeholder="搜索AI编程工具..." class="search-input">
+        </header>
+
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-buttons">
+                <a href="#all" class="nav-btn active">全部工具</a>
+                <a href="#editors" class="nav-btn">AI 编辑器</a>
+                <a href="#assistants" class="nav-btn">编程助手</a>
+                <a href="#platforms" class="nav-btn">在线平台</a>
+                <a href="#generators" class="nav-btn">代码生成器</a>
             </div>
         </nav>
-    </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">找到最适合你的AI编程助手</h1>
-                <p class="hero-subtitle">深度测评Cursor、Trae、GitHub Copilot等主流AI编程工具，基于真实使用场景推荐，帮助开发者提升3-5倍编码效率</p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">69+</span>
-                        <span class="stat-label">AI编程工具</span>
+        <!-- All Tools Section -->
+        <section id="all" class="section">
+            <h2 class="section-title">🎯 全部工具</h2>
+            <div class="tools-grid">
+                <!-- Cursor -->
+                <div class="tool-card">
+                    <div class="tool-icon">⚡</div>
+                    <h3 class="tool-name">Cursor</h3>
+                    <p class="tool-desc">AI 原生代码编辑器，支持自然语言编程、代码补全和调试。基于 VS Code 构建，无缝迁移。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">编辑器</span>
+                        <span class="tag">AI 对话</span>
                     </div>
-                    <div class="stat">
-                        <span class="stat-number">20+</span>
-                        <span class="stat-label">深度测评</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">280万</span>
-                        <span class="stat-label">开发者用户</span>
-                    </div>
+                    <a href="https://cursor.sh" target="_blank" class="tool-link">访问网站 →</a>
                 </div>
-                <div class="hero-cta">
-                    <a href="#tools" class="btn btn-primary">浏览工具</a>
-                    <a href="#reviews" class="btn btn-secondary">查看测评</a>
+
+                <!-- GitHub Copilot -->
+                <div class="tool-card">
+                    <div class="tool-icon">🐙</div>
+                    <h3 class="tool-name">GitHub Copilot</h3>
+                    <p class="tool-desc">GitHub 官方 AI 编程助手，智能代码补全、注释生成代码，支持多种编程语言。</p>
+                    <div class="tool-tags">
+                        <span class="tag paid">付费</span>
+                        <span class="tag">插件</span>
+                        <span class="tag">代码补全</span>
+                    </div>
+                    <a href="https://github.com/features/copilot" target="_blank" class="tool-link">访问网站 →</a>
+                </div>
+
+                <!-- Claude -->
+                <div class="tool-card">
+                    <div class="tool-icon">🤖</div>
+                    <h3 class="tool-name">Claude</h3>
+                    <p class="tool-desc">Anthropic 出品的 AI 助手，擅长代码解释、重构和优化，上下文理解能力强。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">AI 对话</span>
+                        <span class="tag">代码分析</span>
+                    </div>
+                    <a href="https://claude.ai" target="_blank" class="tool-link">访问网站 →</a>
+                </div>
+
+                <!-- Replit -->
+                <div class="tool-card">
+                    <div class="tool-icon">💻</div>
+                    <h3 class="tool-name">Replit</h3>
+                    <p class="tool-desc">在线 IDE，支持 50+ 编程语言，内置 AI 助手，无需配置环境即可开始编程。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">在线 IDE</span>
+                        <span class="tag">协作</span>
+                    </div>
+                    <a href="https://replit.com" target="_blank" class="tool-link">访问网站 →</a>
+                </div>
+
+                <!-- Codeium -->
+                <div class="tool-card">
+                    <div class="tool-icon">✨</div>
+                    <h3 class="tool-name">Codeium</h3>
+                    <p class="tool-desc">免费 AI 代码补全工具，支持 70+ 语言，速度快，准确率高。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">代码补全</span>
+                        <span class="tag">插件</span>
+                    </div>
+                    <a href="https://codeium.com" target="_blank" class="tool-link">访问网站 →</a>
+                </div>
+
+                <!-- Phind -->
+                <div class="tool-card">
+                    <div class="tool-icon">🔍</div>
+                    <h3 class="tool-name">Phind</h3>
+                    <p class="tool-desc">专为开发者设计的 AI 搜索引擎，提供带代码示例的技术问题解答。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">搜索引擎</span>
+                        <span class="tag">技术问答</span>
+                    </div>
+                    <a href="https://phind.com" target="_blank" class="tool-link">访问网站 →</a>
                 </div>
             </div>
         </section>
 
-        <!-- Hot Tools Section -->
-        <section class="section hot-tools" id="tools">
-            <div class="container">
-                <h2 class="section-title">热门AI编程工具</h2>
-                <div class="tools-grid" id="hotToolsGrid">
-                    <!-- Tools will be loaded by JavaScript -->
+        <!-- AI Editors Section -->
+        <section id="editors" class="section">
+            <h2 class="section-title">📝 AI 编辑器</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">⚡</div>
+                    <h3 class="tool-name">Cursor</h3>
+                    <p class="tool-desc">AI 原生代码编辑器，支持自然语言编程、代码补全和调试。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">编辑器</span>
+                    </div>
+                    <a href="https://cursor.sh" target="_blank" class="tool-link">访问网站 →</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">💻</div>
+                    <h3 class="tool-name">Replit</h3>
+                    <p class="tool-desc">在线 IDE，支持 50+ 编程语言，内置 AI 助手。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">在线 IDE</span>
+                    </div>
+                    <a href="https://replit.com" target="_blank" class="tool-link">访问网站 →</a>
                 </div>
             </div>
         </section>
 
-        <!-- Categories Section -->
-        <section class="section categories">
-            <div class="container">
-                <h2 class="section-title">按场景分类</h2>
-                <div class="categories-grid">
-                    <div class="category-card">
-                        <div class="category-icon">💻</div>
-                        <h3>AI原生IDE</h3>
-                        <p>Cursor、Trae等专为AI设计的集成开发环境</p>
-                        <span class="category-count">8个工具</span>
+        <!-- Programming Assistants Section -->
+        <section id="assistants" class="section">
+            <h2 class="section-title">🤖 编程助手</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🐙</div>
+                    <h3 class="tool-name">GitHub Copilot</h3>
+                    <p class="tool-desc">GitHub 官方 AI 编程助手，智能代码补全。</p>
+                    <div class="tool-tags">
+                        <span class="tag paid">付费</span>
+                        <span class="tag">插件</span>
                     </div>
-                    <div class="category-card">
-                        <div class="category-icon">🔌</div>
-                        <h3>IDE插件</h3>
-                        <p>GitHub Copilot、通义灵码等主流编辑器插件</p>
-                        <span class="category-count">15个工具</span>
+                    <a href="https://github.com/features/copilot" target="_blank" class="tool-link">访问网站 →</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">✨</div>
+                    <h3 class="tool-name">Codeium</h3>
+                    <p class="tool-desc">免费 AI 代码补全工具，支持 70+ 语言。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">代码补全</span>
                     </div>
-                    <div class="category-card">
-                        <div class="category-icon">🤖</div>
-                        <h3>代码生成</h3>
-                        <p>专注代码生成与补全的AI工具</p>
-                        <span class="category-count">12个工具</span>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">🔍</div>
-                        <h3>代码审查</h3>
-                        <p>AI驱动的代码质量检测与优化工具</p>
-                        <span class="category-count">6个工具</span>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">📝</div>
-                        <h3>文档生成</h3>
-                        <p>自动生成代码文档和注释的AI工具</p>
-                        <span class="category-count">5个工具</span>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">🧪</div>
-                        <h3>测试生成</h3>
-                        <p>自动生成单元测试和测试用例的工具</p>
-                        <span class="category-count">4个工具</span>
-                    </div>
+                    <a href="https://codeium.com" target="_blank" class="tool-link">访问网站 →</a>
                 </div>
             </div>
         </section>
 
-        <!-- Reviews Section -->
-        <section class="section reviews" id="reviews">
-            <div class="container">
-                <h2 class="section-title">深度测评</h2>
-                <div class="reviews-grid" id="reviewsGrid">
-                    <!-- Reviews will be loaded by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Compare Section -->
-        <section class="section compare" id="compare">
-            <div class="container">
-                <h2 class="section-title">工具对比</h2>
-                <div class="compare-highlight">
-                    <h3>Cursor vs Trae vs GitHub Copilot</h3>
-                    <p>三大主流AI编程工具全面对比，从功能、价格、适用场景多维度分析</p>
-                    <a href="posts/cursor-vs-trae-vs-copilot.html" class="btn btn-primary">查看对比</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tutorials Section -->
-        <section class="section tutorials" id="tutorials">
-            <div class="container">
-                <h2 class="section-title">使用教程</h2>
-                <div class="tutorials-list" id="tutorialsList">
-                    <!-- Tutorials will be loaded by JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section class="section newsletter">
-            <div class="container">
-                <div class="newsletter-content">
-                    <h2>订阅AI编程工具周报</h2>
-                    <p>每周精选最新AI编程工具动态、深度测评和实用技巧</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="输入你的邮箱" class="newsletter-input">
-                        <button type="submit" class="btn btn-primary">订阅</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-icon">&lt;/&gt;</span>
-                    <span class="logo-text">AICode Nav</span>
-                    <p>专注AI编程工具的测评与推荐</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>导航</h4>
-                        <a href="#tools">工具导航</a>
-                        <a href="#reviews">深度测评</a>
-                        <a href="#compare">对比评测</a>
+        <!-- Online Platforms Section -->
+        <section id="platforms" class="section">
+            <h2 class="section-title">🌐 在线平台</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">💻</div>
+                    <h3 class="tool-name">Replit</h3>
+                    <p class="tool-desc">在线 IDE，无需配置环境即可开始编程。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">在线 IDE</span>
                     </div>
-                    <div class="footer-column">
-                        <h4>资源</h4>
-                        <a href="#tutorials">使用教程</a>
-                        <a href="#">工具提交</a>
-                        <a href="#">关于我们</a>
+                    <a href="https://replit.com" target="_blank" class="tool-link">访问网站 →</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">🔍</div>
+                    <h3 class="tool-name">Phind</h3>
+                    <p class="tool-desc">专为开发者设计的 AI 搜索引擎。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">搜索引擎</span>
                     </div>
+                    <a href="https://phind.com" target="_blank" class="tool-link">访问网站 →</a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 AICode Nav. 专注AI编程工具测评与推荐。</p>
-            </div>
-        </div>
-    </footer>
+        </section>
 
-    <script src="js/data.js"></script>
-    <script src="js/main.js"></script>
+        <!-- Code Generators Section -->
+        <section id="generators" class="section">
+            <h2 class="section-title">🎨 代码生成器</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🤖</div>
+                    <h3 class="tool-name">Claude</h3>
+                    <p class="tool-desc">擅长代码解释、重构和优化。</p>
+                    <div class="tool-tags">
+                        <span class="tag free">免费</span>
+                        <span class="tag">AI 对话</span>
+                    </div>
+                    <a href="https://claude.ai" target="_blank" class="tool-link">访问网站 →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 AI 编程工具导航 | 精选 10+ 款最适合初学者的 AI 编程工具</p>
+            <p>从入门到进阶，实测对比，帮你找到最适合自己的学习伙伴</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all buttons
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Scroll to section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover effect to tool cards
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
 </body>
 </html>
