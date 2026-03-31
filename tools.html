@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI编程工具大全 - AICode Nav</title>
+    <meta name="description" content="收录69+ AI编程工具，按场景分类，提供详细对比和真实测评。">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" class="logo">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span class="logo-text">AICode Nav</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="tools.html" class="nav-link">工具导航</a>
+                <a href="index.html#reviews" class="nav-link">深度测评</a>
+                <a href="index.html#compare" class="nav-link">对比评测</a>
+                <a href="index.html#tutorials" class="nav-link">使用教程</a>
+            </div>
+            <div class="nav-search">
+                <input type="text" placeholder="搜索AI编程工具..." class="search-input">
+            </div>
+        </nav>
+    </header>
+
+    <main style="padding-top: 100px;">
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">AI编程工具大全</h1>
+                
+                <!-- 筛选器 -->
+                <div class="filter-bar" style="margin-bottom: 40px; display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button class="btn btn-primary filter-btn" data-category="all">全部</button>
+                    <button class="btn btn-secondary filter-btn" data-category="AI原生IDE">AI原生IDE</button>
+                    <button class="btn btn-secondary filter-btn" data-category="IDE插件">IDE插件</button>
+                    <button class="btn btn-secondary filter-btn" data-category="代码生成">代码生成</button>
+                    <button class="btn btn-secondary filter-btn" data-category="代码审查">代码审查</button>
+                </div>
+                
+                <!-- 工具列表 -->
+                <div class="tools-grid" id="toolsGrid">
+                    <!-- 工具将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span class="logo-text">AICode Nav</span>
+                    <p>专注AI编程工具的测评与推荐</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>导航</h4>
+                        <a href="tools.html">工具导航</a>
+                        <a href="index.html#reviews">深度测评</a>
+                        <a href="index.html#compare">对比评测</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>资源</h4>
+                        <a href="index.html#tutorials">使用教程</a>
+                        <a href="#">工具提交</a>
+                        <a href="#">关于我们</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AICode Nav. 专注AI编程工具测评与推荐。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // 页面加载完成后渲染所有工具
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAllTools();
+            initFilters();
+        });
+        
+        function renderAllTools() {
+            const toolsGrid = document.getElementById('toolsGrid');
+            if (!toolsGrid) return;
+            
+            toolsGrid.innerHTML = toolsData.map(tool => `
+                <div class="tool-card" data-category="${tool.category}">
+                    <div class="tool-header">
+                        <div class="tool-icon">${tool.icon}</div>
+                        <div class="tool-info">
+                            <h3>${tool.name}</h3>
+                            <span class="tool-category">${tool.category}</span>
+                        </div>
+                    </div>
+                    <p class="tool-description">${tool.description}</p>
+                    <div class="tool-tags">
+                        ${tool.tags.map(tag => `<span class="tag ${tag === '热门' ? 'tag-hot' : tag === '免费' || tag === '免费试用' ? 'tag-free' : ''}">${tag}</span>`).join('')}
+                    </div>
+                    <div class="tool-footer">
+                        <div class="tool-rating">
+                            <span class="stars">${'★'.repeat(Math.floor(tool.rating))}${'☆'.repeat(5 - Math.floor(tool.rating))}</span>
+                            <span>${tool.rating}</span>
+                        </div>
+                        <a href="tools/${tool.id}.html" class="tool-link">查看详情 →</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function initFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 更新按钮样式
+                    filterBtns.forEach(b => {
+                        b.classList.remove('btn-primary');
+                        b.classList.add('btn-secondary');
+                    });
+                    this.classList.remove('btn-secondary');
+                    this.classList.add('btn-primary');
+                    
+                    // 筛选工具
+                    const category = this.dataset.category;
+                    const tools = document.querySelectorAll('.tool-card');
+                    
+                    tools.forEach(tool => {
+                        if (category === 'all' || tool.dataset.category === category) {
+                            tool.style.display = 'block';
+                        } else {
+                            tool.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+    </script>
+</body>
+</html>

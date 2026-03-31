@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AICode Nav - AI编程工具导航与测评</title>
+    <meta name="description" content="专注AI编程工具的测评、对比与推荐。Cursor、Trae、GitHub Copilot等主流AI编程助手深度评测，帮助开发者选择最适合的AI编程工具。">
+    <meta name="keywords" content="AI编程工具,AI代码助手,Cursor,Trae,GitHub Copilot,代码补全,AI编程导航">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" class="logo">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span class="logo-text">AICode Nav</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="#tools" class="nav-link">工具导航</a>
+                <a href="#reviews" class="nav-link">深度测评</a>
+                <a href="#compare" class="nav-link">对比评测</a>
+                <a href="#tutorials" class="nav-link">使用教程</a>
+            </div>
+            <div class="nav-search">
+                <input type="text" placeholder="搜索AI编程工具..." class="search-input">
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">找到最适合你的AI编程助手</h1>
+                <p class="hero-subtitle">深度测评Cursor、Trae、GitHub Copilot等主流AI编程工具，基于真实使用场景推荐，帮助开发者提升3-5倍编码效率</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">69+</span>
+                        <span class="stat-label">AI编程工具</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">20+</span>
+                        <span class="stat-label">深度测评</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">280万</span>
+                        <span class="stat-label">开发者用户</span>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#tools" class="btn btn-primary">浏览工具</a>
+                    <a href="#reviews" class="btn btn-secondary">查看测评</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hot Tools Section -->
+        <section class="section hot-tools" id="tools">
+            <div class="container">
+                <h2 class="section-title">热门AI编程工具</h2>
+                <div class="tools-grid" id="hotToolsGrid">
+                    <!-- Tools will be loaded by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="section categories">
+            <div class="container">
+                <h2 class="section-title">按场景分类</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">💻</div>
+                        <h3>AI原生IDE</h3>
+                        <p>Cursor、Trae等专为AI设计的集成开发环境</p>
+                        <span class="category-count">8个工具</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🔌</div>
+                        <h3>IDE插件</h3>
+                        <p>GitHub Copilot、通义灵码等主流编辑器插件</p>
+                        <span class="category-count">15个工具</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🤖</div>
+                        <h3>代码生成</h3>
+                        <p>专注代码生成与补全的AI工具</p>
+                        <span class="category-count">12个工具</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🔍</div>
+                        <h3>代码审查</h3>
+                        <p>AI驱动的代码质量检测与优化工具</p>
+                        <span class="category-count">6个工具</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">📝</div>
+                        <h3>文档生成</h3>
+                        <p>自动生成代码文档和注释的AI工具</p>
+                        <span class="category-count">5个工具</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🧪</div>
+                        <h3>测试生成</h3>
+                        <p>自动生成单元测试和测试用例的工具</p>
+                        <span class="category-count">4个工具</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section class="section reviews" id="reviews">
+            <div class="container">
+                <h2 class="section-title">深度测评</h2>
+                <div class="reviews-grid" id="reviewsGrid">
+                    <!-- Reviews will be loaded by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Compare Section -->
+        <section class="section compare" id="compare">
+            <div class="container">
+                <h2 class="section-title">工具对比</h2>
+                <div class="compare-highlight">
+                    <h3>Cursor vs Trae vs GitHub Copilot</h3>
+                    <p>三大主流AI编程工具全面对比，从功能、价格、适用场景多维度分析</p>
+                    <a href="posts/cursor-vs-trae-vs-copilot.html" class="btn btn-primary">查看对比</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorials Section -->
+        <section class="section tutorials" id="tutorials">
+            <div class="container">
+                <h2 class="section-title">使用教程</h2>
+                <div class="tutorials-list" id="tutorialsList">
+                    <!-- Tutorials will be loaded by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="section newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>订阅AI编程工具周报</h2>
+                    <p>每周精选最新AI编程工具动态、深度测评和实用技巧</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="输入你的邮箱" class="newsletter-input">
+                        <button type="submit" class="btn btn-primary">订阅</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">&lt;/&gt;</span>
+                    <span class="logo-text">AICode Nav</span>
+                    <p>专注AI编程工具的测评与推荐</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>导航</h4>
+                        <a href="#tools">工具导航</a>
+                        <a href="#reviews">深度测评</a>
+                        <a href="#compare">对比评测</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>资源</h4>
+                        <a href="#tutorials">使用教程</a>
+                        <a href="#">工具提交</a>
+                        <a href="#">关于我们</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AICode Nav. 专注AI编程工具测评与推荐。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
